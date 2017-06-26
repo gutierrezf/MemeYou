@@ -141,6 +141,8 @@ class MemeViewController: UIViewController {
         selectedFontFamily = "Futura"
         setTextAttributes(UIFont(name: selectedFontFamily, size: selectedFontSize))
         
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        
         topText.resignFirstResponder()
         baseText.resignFirstResponder()
     }
