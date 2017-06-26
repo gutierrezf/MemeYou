@@ -46,7 +46,6 @@ class MemeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-        resetEditor()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,16 +72,18 @@ class MemeViewController: UIViewController {
 
 
     @IBAction func camaraAction(_ sender: Any) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = .camera
-        present(controller, animated: true, completion: nil)
+        chooseSourceType(.camera)
     }
     
-    @IBAction func experiment(_ sender: Any) {
+    @IBAction func photoLibraryAction(_ sender: Any) {
+        chooseSourceType(.photoLibrary)
+    }
+    
+    func chooseSourceType(_ sourceType: UIImagePickerControllerSourceType) {
         let controller = UIImagePickerController()
         controller.delegate = self
-        controller.sourceType = .photoLibrary
+        controller.sourceType = sourceType
+        controller.allowsEditing = true
         present(controller, animated: true, completion: nil)
     }
     
@@ -121,9 +122,13 @@ class MemeViewController: UIViewController {
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.view
         
-        present(activityController, animated: true) { 
-            self.save(memedImage)
+        activityController.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, items: [Any]?, error: Error?) in
+            if (completed) {
+                self.save(memedImage)
+            }
         }
+            
+        present(activityController, animated: true, completion: nil)
     }
     
     func resetEditor() {

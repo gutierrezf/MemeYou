@@ -16,8 +16,15 @@ extension MemeViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            imageView.image = img
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imageView.image = editedImage
+            
+        } else  if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            self.imageView.image = img
+            navigationItem.leftBarButtonItem?.isEnabled = true
+        }
+        
+        if imageView.image != nil {
             navigationItem.leftBarButtonItem?.isEnabled = true
         }
         dismiss(animated: true, completion: nil)

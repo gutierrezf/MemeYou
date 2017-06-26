@@ -95,7 +95,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="jgY-9B-aoO"/>
                                     <barButtonItem title="Album" id="a74-WB-OZs">
                                         <connections>
-                                            <action selector="experiment:" destination="BYZ-38-t0r" id="eYo-A6-ZEF"/>
+                                            <action selector="photoLibraryAction:" destination="BYZ-38-t0r" id="snv-dS-1zm"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="JMj-nb-Fyz"/>
