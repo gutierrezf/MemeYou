@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeViewController.swift
 //  MemeYou
 //
 //  Created by Francis Gutierrez on 6/5/17.
@@ -99,14 +99,12 @@ class MemeViewController: UIViewController {
     
     func keyboardWillShow(_ notification:Notification) {
         if baseText.isFirstResponder {
-            view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        if view.frame.origin.y < 0 {
-            view.frame.origin.y += getKeyboardHeight(notification)
-        }
+       view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
